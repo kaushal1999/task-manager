@@ -1,12 +1,22 @@
-const express = require("express")
-const port=5000
-const app = express()
+const express = require("express");
+const port = 5000;
+const app = express();
+require("dotenv").config()
+const tasks = require("./routes/tasks");
+const connectDB = require("./db/connect");
 
-const tasks=require('./routes/tasks')
-
-app.use('/api/v1/tasks', tasks)
+app.use("/api/v1/tasks", tasks);
 
 
 
+const start = async () => {
+    try {
+    await connectDB(process.env.MONGODB_URI);
+    app.listen(port, console.log("listening..."));
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-app.listen(port,console.log("listening..."))
+
+start()
