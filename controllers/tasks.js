@@ -1,7 +1,7 @@
 const Task = require("../models/tasks");
 const asyncWrapper = require("../middlewares/async-wrapper");
 
-const getAllTasks = asyncWrapper(async (req, res, next) => {
+const getAllTasks = asyncWrapper(async (req, res) => {
   const tasks = await Task.find({});
   res.status(200).json(tasks);
 });
