@@ -23,7 +23,7 @@ const getTask = asyncWrapper(async (req, res,next) => {
   res.status(200).json(task);
 });
 
-const updateTask = asyncWrapper(async (req, res) => {
+const updateTask = asyncWrapper(async (req, res,next) => {
   const id = req.params.id;
   const task = await Task.findOneAndUpdate({ _id: id }, req.body, {
     new: true,
@@ -37,13 +37,14 @@ const updateTask = asyncWrapper(async (req, res) => {
   res.status(200).json(task);
 });
 
-const deleteTask = asyncWrapper(async (req, res) => {
+const deleteTask = asyncWrapper(async (req, res,next) => {
   const id = req.params.id;
   const task = await Task.findOneAndDelete({ _id: id });
   if (!task) {
      const error = new Error("No Task Found");
      error.status = 404;
      return next(error);
+    // return res.send(error.message)
   }
   res.status(200).json(task);
 });

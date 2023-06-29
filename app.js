@@ -5,7 +5,7 @@ require("dotenv").config();
 const tasks = require("./routes/tasks");
 const connectDB = require("./db/connect");
 const notFound = require("./middlewares/not-found");
-const errorHandler = require("./middlewares/error-handler");
+const errorHandler = require("./errors/error-handler");
 
 app.use(express.json());
 
